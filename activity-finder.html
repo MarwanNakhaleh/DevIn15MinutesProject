@@ -14,44 +14,9 @@
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-      function validateForm() {
-        let type = document.getElementById("type").value;
-        const participants = document.getElementById("participants").value;
-        const min_price = document.getElementById("min_price").value;
-        const max_price = document.getElementById("max_price").value;
-
-        if (type !== "") {
-          const possibleValues = [
-            "education",
-            "recreational",
-            "social",
-            "diy",
-            "charity",
-            "cooking",
-            "relaxation",
-            "music",
-            "busywork",
-          ];
-          type = type.trim();
-          type = type.toLowerCase();
-          if (!possibleValues.includes(type)) {
-            return "type";
-          }
-        }
-        if(participants !== "") {
-          
-        }
-
-        if (participants !== "") {
-        }
-      }
-
       $(document).ready(function () {
         $("form").on("submit", function (event) {
           event.preventDefault();
-
-          if (validateForm === "") {
-          }
 
           let url = "http://www.boredapi.com/api/activity?";
           const type = document.getElementById("type").value;
