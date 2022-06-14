@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Marwan's Website</title>
+    <title>Find a fun activity here!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -87,12 +87,26 @@
         <i class="fa fa-bars"></i>
       </a>
     </div>
-    <div class="about-me">
-      <h1>Hi, I'm Marwan!</h1>
-      <img src="images/marwan.jpg" />
-      <h2>About Me</h2>
-      <p>My name is Marwan Nakhaleh. I live in Indianapolis, Indiana.</p> 
-      <p>When I'm not working my full-time software engineering job, I'm either working on personal projects, walking, doing chores, or eating.</p>
+    <form>
+      <label for="type"
+        >Type (must be one of "education", "recreational", "social", "diy",
+        "charity", "cooking", "relaxation", "music", "busywork"):</label
+      ><br />
+      <input type="text" id="type" name="type" /><br />
+      <label for="participants">Participants:</label><br />
+      <input type="text" id="participants" name="participants" /><br />
+      <label for="min_price">Minimum price:</label><br />
+      <input type="text" id="min_price" name="min_price" /><br />
+      <label for="max_price">Maximum price:</label><br />
+      <input type="text" id="max_price" name="max_price" /><br />
+      <button type="submit">Find an activity!</button>
+    </form>
+    <div class="activity">
+      <div id="activity_name"></div>
+      <div id="activity_type"></div>
+      <div id="activity_participants"></div>
+      <div id="activity_price"></div>
     </div>
+    <div class="activity_suggestion"></div>
   </body>
 </html>
