@@ -13,79 +13,9 @@
   </head>
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-      function validateForm() {
-        let type = document.getElementById("type").value;
-        const participants = document.getElementById("participants").value;
-        const min_price = document.getElementById("min_price").value;
-        const max_price = document.getElementById("max_price").value;
-
-        if (type !== ""){
-          const possibleValues = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
-          type = type.trim();
-          type = type.toLowerCase();
-          if (!possibleValues.includes(type)) {
-            return "type";
-          }
-        }
-
-        if(participants !== "") {
-          
-        }
-      }
-
-      $(document).ready(function() {
-        $("form").on("submit", function(event) {
-          event.preventDefault();
-
-          if(validateForm === ""){
-            
-          }
-
-          let url = "http://www.boredapi.com/api/activity?";
-          const type = document.getElementById("type").value;
-          const participants = document.getElementById("participants").value;
-          const min_price = document.getElementById("min_price").value;
-          const max_price = document.getElementById("max_price").value;
-          if (type !== "") {
-            url += `type=${type}&`;
-          }
-          if (participants !== "") {
-            url += `participants=${participants}&`;
-          }
-          if (min_price !== "") {
-            url += `min_price=${min_price}&`;
-          }
-          if (max_price !== "") {
-            url += `max_price=${max_price}&`;
-          }
-          console.log("URL: " + url);
-          $.ajax({
-            method: "GET",
-            url: url,
-          })
-            .done(function(data) {
-              // {"activity":"Learn how to iceskate or rollerskate","type":"recreational","participants":1,"price":0.1,"link":"","key":"5947957","accessibility":0.25}
-              console.log(JSON.stringify(data));
-              $("#activity_name").text("Name: " + data.activity);
-              $("#activity_type").text("Type: " + data.type);
-              $("#activity_participants").text(
-                "Participants: " + data.participants
-              );
-              $("#activity_price").text("Price: " + data.price);
-            })
-            .fail(function(err) {
-              console.log(err);
-            });
-        });
-      });
-    </script>
     <div class="topnav" id="myTopnav">
-      <a href="index.html" class="active">Home</a>
+      <a href="/" class="active">Home</a>
       <a href="activity-finder.html">Bored? Find an activity!</a>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-      </a>
     </div>
     <div class="about-me">
       <h1>Hi, I'm Marwan!</h1>

@@ -20,26 +20,37 @@
         const min_price = document.getElementById("min_price").value;
         const max_price = document.getElementById("max_price").value;
 
-        if (type !== ""){
-          const possibleValues = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
+        if (type !== "") {
+          const possibleValues = [
+            "education",
+            "recreational",
+            "social",
+            "diy",
+            "charity",
+            "cooking",
+            "relaxation",
+            "music",
+            "busywork",
+          ];
           type = type.trim();
           type = type.toLowerCase();
           if (!possibleValues.includes(type)) {
             return "type";
           }
         }
-
         if(participants !== "") {
           
         }
+
+        if (participants !== "") {
+        }
       }
 
-      $(document).ready(function() {
-        $("form").on("submit", function(event) {
+      $(document).ready(function () {
+        $("form").on("submit", function (event) {
           event.preventDefault();
 
-          if(validateForm === ""){
-            
+          if (validateForm === "") {
           }
 
           let url = "http://www.boredapi.com/api/activity?";
@@ -60,32 +71,48 @@
             url += `max_price=${max_price}&`;
           }
           console.log("URL: " + url);
+          $("#find-activity-button").css("background-color", "gray");
+          $("#find-activity-button").prop("disabled", true);
+          $;
           $.ajax({
             method: "GET",
             url: url,
           })
-            .done(function(data) {
+            .done(function (data) {
               // {"activity":"Learn how to iceskate or rollerskate","type":"recreational","participants":1,"price":0.1,"link":"","key":"5947957","accessibility":0.25}
               console.log(JSON.stringify(data));
-              $("#activity_name").text("Name: " + data.activity);
-              $("#activity_type").text("Type: " + data.type);
-              $("#activity_participants").text(
-                "Participants: " + data.participants
-              );
-              $("#activity_price").text("Price: " + data.price);
+              if (data.error) {
+                $("#activity_error").text(
+                  "Sorry, the service we're using doesn't have any activities that match these criteria :("
+                );
+              } else {
+                $("#activity_name").text("Name: " + data.activity);
+                $("#activity_type").text("Type: " + data.type);
+                $("#activity_participants").text(
+                  "Participants: " + data.participants
+                );
+                $("#activity_price").text("Price: " + data.price);
+                $("#find-activity-button").css(
+                  "background-color",
+                  "rgb(74, 85, 204)"
+                );
+                $("#find-activity-button").prop("disabled", false);
+              }
             })
-            .fail(function(err) {
+            .fail(function (err) {
               console.log(err);
+              $("#find-activity-button").css(
+                "background-color",
+                "rgb(74, 85, 204)"
+              );
+              $("#find-activity-button").prop("disabled", false);
             });
         });
       });
     </script>
     <div class="topnav" id="myTopnav">
-      <a href="index.html" class="active">Home</a>
+      <a href="/" class="active">Home</a>
       <a href="activity-finder.html">Bored? Find an activity!</a>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-      </a>
     </div>
     <form>
       <label for="type"
@@ -99,14 +126,14 @@
       <input type="text" id="min_price" name="min_price" /><br />
       <label for="max_price">Maximum price:</label><br />
       <input type="text" id="max_price" name="max_price" /><br />
-      <button type="submit">Find an activity!</button>
+      <button type="submit" id="find-activity-button">Find an activity!</button>
     </form>
     <div class="activity">
       <div id="activity_name"></div>
       <div id="activity_type"></div>
       <div id="activity_participants"></div>
       <div id="activity_price"></div>
+      <div id="activity_error"></div>
     </div>
-    <div class="activity_suggestion"></div>
   </body>
 </html>

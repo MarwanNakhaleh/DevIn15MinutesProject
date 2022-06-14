@@ -2,8 +2,6 @@ html {
   font-family: "Montserrat", sans-serif;
   justify-content: center;
   background-color: aqua;
-  height: 100%;
-  width: 100%;
 }
 
 body {
@@ -47,6 +45,7 @@ form input {
 
 .activity {
   margin-top: 50px;
+  font-weight: bold;
 }
 
 form label,
@@ -57,13 +56,15 @@ form input {
 }
 
 button {
-  background-color: rgb(88, 101, 242);
+  background-color: rgb(74, 85, 204);
   border-radius: 5px;
+  border: none;
   color: white;
-  margin-top: 24px;
   width: 400px;
   font-size: 36px;
   font-family: "Montserrat";
+  margin: 24px auto;
+  display: block;
 }
 
 /* Add a black background color to the top navigation */
@@ -92,7 +93,7 @@ button {
 
 /* Add an active class to highlight the current page */
 .topnav a.active {
-  background-color: #04aa6d;
+  background-color: rgb(74, 85, 204);
   color: white;
 }
 
