@@ -1,0 +1,53 @@
+body, form, form input, form label, button, div{
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+}
+
+body {
+    background-color: aqua;
+} 
+
+form, .activity {
+    width: 60%;
+    margin-top: 100px;
+}
+
+form input {
+    width: 100%;
+}
+
+.activity {
+    margin-top: 50px;
+}
+
+form label, form input, div {
+    font-size: 20px;
+    line-height: 25px;
+    margin: 10px auto;
+}
+
+button {
+    background-color: rgb(88, 101, 242);
+    border-radius: 5px;
+    color: white;
+    margin-top: 24px;
+    width: 400px;
+    font-size:36px;
+    font-family: "Montserrat";
+}
+
+@media only screen and (max-width: 1000px) {
+    form {
+        width: 90%;
+        margin-top: 50px;
+    }
+
+    form label {
+        font-size: 16px;
+    }
+
+    form input {
+        height: 20px;
+    }
+}

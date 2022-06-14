@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find a fun activity here!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      function validateForm() {
+        let type = document.getElementById("type").value;
+        const participants = document.getElementById("participants").value;
+        const min_price = document.getElementById("min_price").value;
+        const max_price = document.getElementById("max_price").value;
+
+        if (type !== ""){
+          const possibleValues = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
+          type = type.trim();
+          type = type.toLowerCase();
+          if (!possibleValues.includes(type)) {
+            return "type";
+          }
+        }
+
+        if(participants !== "") {
+          
+        }
+      }
+
+      $(document).ready(function() {
+        $("form").on("submit", function(event) {
+          event.preventDefault();
+
+          if(validateForm === ""){
+            
+          }
+
+          let url = "http://www.boredapi.com/api/activity?";
+          const type = document.getElementById("type").value;
+          const participants = document.getElementById("participants").value;
+          const min_price = document.getElementById("min_price").value;
+          const max_price = document.getElementById("max_price").value;
+          if (type !== "") {
+            url += `type=${type}&`;
+          }
+          if (participants !== "") {
+            url += `participants=${participants}&`;
+          }
+          if (min_price !== "") {
+            url += `min_price=${min_price}&`;
+          }
+          if (max_price !== "") {
+            url += `max_price=${max_price}&`;
+          }
+          console.log("URL: " + url);
+          $.ajax({
+            method: "GET",
+            url: url,
+          })
+            .done(function(data) {
+              // {"activity":"Learn how to iceskate or rollerskate","type":"recreational","participants":1,"price":0.1,"link":"","key":"5947957","accessibility":0.25}
+              console.log(JSON.stringify(data));
+              $("#activity_name").text("Name: " + data.activity);
+              $("#activity_type").text("Type: " + data.type);
+              $("#activity_participants").text(
+                "Participants: " + data.participants
+              );
+              $("#activity_price").text("Price: " + data.price);
+            })
+            .fail(function(err) {
+              console.log(err);
+            });
+        });
+      });
+    </script>
+    <form>
+      <label for="type"
+        >Type (must be one of "education", "recreational", "social", "diy",
+        "charity", "cooking", "relaxation", "music", "busywork"):</label
+      ><br />
+      <input type="text" id="type" name="type" /><br />
+      <label for="participants">Participants:</label><br />
+      <input type="text" id="participants" name="participants" /><br />
+      <label for="min_price">Minimum price:</label><br />
+      <input type="text" id="min_price" name="min_price" /><br />
+      <label for="max_price">Maximum price:</label><br />
+      <input type="text" id="max_price" name="max_price" /><br />
+      <button type="submit">Find an activity!</button>
+    </form>
+    <div class="activity">
+      <div id="activity_name"></div>
+      <div id="activity_type"></div>
+      <div id="activity_participants"></div>
+      <div id="activity_price"></div>
+    </div>
+    <div class="activity_suggestion"></div>
+  </body>
+</html>
