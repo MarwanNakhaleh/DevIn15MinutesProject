@@ -12,74 +12,41 @@
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $("form").on("submit", function (event) {
-          event.preventDefault();
+      function getActivity() {
+        let url = "http://www.boredapi.com/api/activity?";
+        const type = document.getElementById("type").value;
+        const participants = document.getElementById("participants").value;
+        const min_price = document.getElementById("min_price").value;
+        const max_price = document.getElementById("max_price").value;
+        if (type !== "") {
+          url += `type=${type}&`;
+        }
+        if (participants !== "") {
+          url += `participants=${participants}&`;
+        }
+        if (min_price !== "") {
+          url += `min_price=${min_price}&`;
+        }
+        if (max_price !== "") {
+          url += `max_price=${max_price}&`;
+        }
+        console.log("URL: " + url);
 
-          let url = "http://www.boredapi.com/api/activity?";
-          const type = document.getElementById("type").value;
-          const participants = document.getElementById("participants").value;
-          const min_price = document.getElementById("min_price").value;
-          const max_price = document.getElementById("max_price").value;
-          if (type !== "") {
-            url += `type=${type}&`;
-          }
-          if (participants !== "") {
-            url += `participants=${participants}&`;
-          }
-          if (min_price !== "") {
-            url += `min_price=${min_price}&`;
-          }
-          if (max_price !== "") {
-            url += `max_price=${max_price}&`;
-          }
-          console.log("URL: " + url);
-          $("#find-activity-button").css("background-color", "gray");
-          $("#find-activity-button").prop("disabled", true);
-          $;
-          $.ajax({
-            method: "GET",
-            url: url,
-          })
-            .done(function (data) {
-              // {"activity":"Learn how to iceskate or rollerskate","type":"recreational","participants":1,"price":0.1,"link":"","key":"5947957","accessibility":0.25}
-              console.log(JSON.stringify(data));
-              if (data.error) {
-                $("#activity_error").text(
-                  "Sorry, the service we're using doesn't have any activities that match these criteria :("
-                );
-              } else {
-                $("#activity_name").text("Name: " + data.activity);
-                $("#activity_type").text("Type: " + data.type);
-                $("#activity_participants").text(
-                  "Participants: " + data.participants
-                );
-                $("#activity_price").text("Price: " + data.price);
-                $("#find-activity-button").css(
-                  "background-color",
-                  "rgb(74, 85, 204)"
-                );
-                $("#find-activity-button").prop("disabled", false);
-              }
-            })
-            .fail(function (err) {
-              console.log(err);
-              $("#find-activity-button").css(
-                "background-color",
-                "rgb(74, 85, 204)"
-              );
-              $("#find-activity-button").prop("disabled", false);
-            });
+        fetch(url, { method: "get" })
+        .then(response => {
+          return response.text();
+        })
+        .then(text => {
+          console.log(text);
         });
-      });
+      }
     </script>
     <div class="topnav" id="myTopnav">
       <a href="index.html" class="active">Home</a>
       <a href="activity-finder.html">Bored? Find an activity!</a>
     </div>
-    <form>
+    <form onsubmit="getActivity();return false;">
       <label for="type"
         >Type (must be one of "education", "recreational", "social", "diy",
         "charity", "cooking", "relaxation", "music", "busywork"):</label
